@@ -127,6 +127,7 @@
         <v-card-actions class="pt-0 mt-0">
           <v-spacer></v-spacer>
           <v-btn color="light-blue darken-4" text :href="'tel:' + fullAd.userPhone">Contato</v-btn>
+          <v-btn v-if="userProfile.isAdmin || fullAd.userId === userId" color="red darken-4" text @click="showFullAd = false; delAd(fullAd)">Excluir</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -134,7 +135,30 @@
       <v-card>
         <v-card-title class="headline">Ajuda</v-card-title>
         <v-card-text>
-          <p class="mb-0">Opções</p>
+          <p class="mb-2">Anuncie aqui produtos locais para venda.</p>
+          <p class="mb-2 text-justify">Com intuito de auxiliar os pequenos produtores rurais, este aplicativo permite a divulgação de produtos para toda base de usuários..</p>
+          <center>
+          <v-row>
+            <v-col cols="3">
+              <v-img contain max-width="100" max-height="100" src="../assets/ods/1.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img contain max-width="100" max-height="100" src="../assets/ods/2.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img contain max-width="100" max-height="100" src="../assets/ods/3.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img contain max-width="100" max-height="100" src="../assets/ods/9.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img contain max-width="100" max-height="100" src="../assets/ods/11.jpg"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-img contain max-width="100" max-height="100" src="../assets/ods/12.jpg"></v-img>
+            </v-col>
+          </v-row>
+          </center>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -151,6 +175,7 @@ import moment from 'moment'
 export default {
   data () {
     return {
+      userId: auth.currentUser.uid,
       announceForm: {
         title: '',
         content: '',
@@ -212,6 +237,15 @@ export default {
       this.announceForm.location = ''
       this.announceForm.price = 0
       this.showAnnounce = false
+    },
+
+    async delAd(ad) {
+      await organicAdsCollection.doc(ad.id).delete()
+        .then(function() {
+        })
+        .catch(function(e) {
+          console.log("ERRO" + e)
+        })
     },
 
     uploadPhotos(e) {

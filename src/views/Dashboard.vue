@@ -7,7 +7,7 @@
     </v-card>
     <v-row align="stretch" justify="center">
       <v-col class="col-6 pl-6">
-        <v-card hover color="#145991" link :to="(userProfile.isAdmin && userProfile.adminPermissions.rides) ? '/admin/rides' : '/rides'" :disabled="(userProfile.isAdmin && !userProfile.adminPermissions.rides) ? true : false">
+        <v-card hover color="#85241D" link :to="'/rides'">
           <v-card-title>
             <v-icon size="40" color="white">directions_car</v-icon>
           </v-card-title>
@@ -17,17 +17,17 @@
         </v-card>
       </v-col>
       <v-col class="col-6 pr-6">
-        <v-card hover color="#85241D" link :to="(userProfile.isAdmin && userProfile.adminPermissions.parkeds) ? '/admin/parkeds' : '/parkeds'" :disabled="(userProfile.isAdmin && !userProfile.adminPermissions.parkeds) ? true : false">
+        <v-card hover color="#CFB80A" link href="https://eouve.com.br/">
           <v-card-title>
-            <v-icon size="40" color="white">local_parking</v-icon>
+            <v-icon size="40" color="white">record_voice_over</v-icon>
           </v-card-title>
           <v-card-subtitle class="white--text">
-            Estacione Aqui
+            eOuve
           </v-card-subtitle>
         </v-card>
       </v-col>
       <v-col class="col-6 pl-6">
-        <v-card hover color="#4F382F" link :to="(userProfile.isAdmin && userProfile.adminPermissions.garbageAds) ? '/admin/garbageAds' : '/garbageAds'" :disabled="(userProfile.isAdmin && !userProfile.adminPermissions.garbageAds) ? true : false">
+        <v-card hover color="#4F382F" link :to="'/garbageAds'">
           <v-card-title>
             <v-icon size="40" color="white">restore_from_trash</v-icon>
           </v-card-title>
@@ -37,7 +37,7 @@
         </v-card>
       </v-col>
       <v-col class="col-6 pr-6">
-        <v-card hover color="#275C29" link :to="(userProfile.isAdmin && userProfile.adminPermissions.organicAds) ? '/admin/organicAds' : '/organicAds'" :disabled="(userProfile.isAdmin && !userProfile.adminPermissions.organicAds) ? true : false">
+        <v-card hover color="#275C29" link :to="'/organicAds'">
           <v-card-title>
             <v-icon size="40" color="white">shopping_basket</v-icon>
           </v-card-title>
@@ -50,6 +50,16 @@
     <div class="text-body-2 pl-3 pt-2 pb-2">Mais informações</div>
     <v-row align="stretch" justify="center">
       <v-col class="col-6 pl-6">
+        <v-card hover color="#01579B" link @click="showODSModal = true">
+          <v-card-title>
+            <v-icon size="40" color="white">card_membership</v-icon>
+          </v-card-title>
+          <v-card-subtitle class="white--text">
+            ODS
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+      <v-col class="col-6 pr-6">
         <v-card hover color="#545454" link @click="showPrefectureModal = true">
           <v-card-title>
             <v-icon size="40" color="white">account_balance</v-icon>
@@ -59,7 +69,7 @@
           </v-card-subtitle>
         </v-card>
       </v-col>
-      <v-col class="col-6 pr-6">
+      <v-col class="col-12 pl-6 pr-6">
         <v-card hover color="#545454" disabled link>
           <v-card-title>
             <v-icon size="40" color="white">add</v-icon>
@@ -99,6 +109,26 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="showODSModal">
+      <v-card>
+        <v-card-title class="headline">ODS</v-card-title>
+        <v-card-text>
+          <p>Objetivos de Desenvolvimento Sustentável</p>
+          <v-list>
+            <v-list-item-group color="primary">
+              <v-list-item href="https://odsbrasil.gov.br/">
+                <v-list-item-icon>
+                  <v-icon>remove_from_queue</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Leia Mais</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -108,7 +138,8 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      showPrefectureModal: false
+      showPrefectureModal: false,
+      showODSModal: false
     }
   },
   computed: {
